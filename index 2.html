@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taiwo Okeowo — Systems, Product & Delivery</title>
+<meta name="description" content="Taiwo Okeowo — Business Analyst, Product Manager, and Project Manager building workflows for fintech and enterprise SaaS across Europe and Africa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAF0F7;
+    --paper-alt:#DCE7F2;
+    --card:#F5F9FC;
+    --ink:#0F1B2D;
+    --ink-soft:#4C5F78;
+    --ink-faint:#8296AE;
+    --accent:#2A63C9;
+    --accent-soft:#C7DAF3;
+    --accent-deep:#1B4A9E;
+    --signal:#0E7A82;
+    --line:#C4D3E4;
+    --line-soft:#D5E0ED;
+    --radius:2px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    margin:0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px;}
+  img{max-width:100%;display:block;}
+  ::selection{background:var(--accent-soft);color:var(--ink);}
+  :focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(239,238,230,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .navbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:var(--maxw);margin:0 auto;
+  }
+  .brand{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;font-size:18px;letter-spacing:-0.01em;
+    text-decoration:none;
+  }
+  .brand .dot{color:var(--accent);}
+  nav.links{display:flex;gap:28px;align-items:center;}
+  nav.links a{
+    text-decoration:none;font-size:14px;color:var(--ink-soft);
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.02em;
+    transition:color .15s;
+  }
+  nav.links a:hover{color:var(--ink);}
+  .navbar .cta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    border:1px solid var(--ink);
+    padding:8px 16px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:background .15s, color .15s;
+  }
+  .navbar .cta:hover{background:var(--ink);color:var(--paper);}
+  .navtoggle{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:88px 0 60px;position:relative;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;color:var(--accent-deep);
+    letter-spacing:0.06em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--accent-deep);display:inline-block;}
+  .hero h1{
+    font-size:clamp(40px,5.6vw,72px);
+    line-height:1.03;
+    max-width:15ch;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--accent-deep);
+  }
+  .hero-sub{
+    margin-top:26px;max-width:56ch;
+    font-size:18px;color:var(--ink-soft);
+  }
+  .hero-actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace;font-size:14px;
+    padding:13px 22px;text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    border:1px solid var(--ink);
+    transition:background .15s,color .15s;
+  }
+  .btn.primary{background:var(--ink);color:var(--paper);}
+  .btn.primary:hover{background:var(--accent-deep);border-color:var(--accent-deep);}
+  .btn.ghost{color:var(--ink);}
+  .btn.ghost:hover{background:var(--ink);color:var(--paper);}
+
+  /* pipeline diagram */
+  .pipeline{
+    margin-top:64px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    position:relative;
+  }
+  .pipeline::before{
+    content:"";position:absolute;top:11px;left:5%;right:5%;height:1px;
+    background:var(--line);
+  }
+  .pipeline .node{position:relative;padding-top:36px;}
+  .pipeline .node .dot{
+    position:absolute;top:0;left:0;width:23px;height:23px;border-radius:50%;
+    background:var(--card);border:1px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+  }
+  .pipeline .node:nth-child(1) .dot{animation:pulse 4s ease-in-out infinite; animation-delay:0s;}
+  .pipeline .node:nth-child(2) .dot{animation:pulse 4s ease-in-out infinite; animation-delay:1s;}
+  .pipeline .node:nth-child(3) .dot{animation:pulse 4s ease-in-out infinite; animation-delay:2s;}
+  .pipeline .node:nth-child(4) .dot{animation:pulse 4s ease-in-out infinite; animation-delay:3s;}
+  @keyframes pulse{
+    0%,75%,100%{background:var(--card);border-color:var(--ink);color:var(--ink);}
+    10%,40%{background:var(--accent-deep);border-color:var(--accent-deep);color:var(--paper);}
+  }
+  .pipeline .node .label{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;
+  }
+  .pipeline .node .desc{font-size:13px;color:var(--ink-faint);margin-top:3px;max-width:20ch;}
+
+  .stat-row{
+    margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+  }
+  .stat{padding:22px 22px 0 0;border-left:1px solid var(--line);padding-left:20px;}
+  .stat:first-child{border-left:none;padding-left:0;}
+  .stat .num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:600;color:var(--accent-deep);}
+  .stat .lbl{font-size:13px;color:var(--ink-soft);margin-top:4px;}
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:88px 0;}
+  .section-head{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    margin-bottom:44px;flex-wrap:wrap;gap:18px;
+    border-bottom:1px solid var(--line);padding-bottom:22px;
+  }
+  .section-head .tag{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--accent-deep);
+    text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;display:block;
+  }
+  .section-head h2{font-size:clamp(26px,3.2vw,38px);}
+  .section-head p{color:var(--ink-soft);max-width:44ch;font-size:15px;}
+
+  /* ---------- LENS SWITCHER ---------- */
+  .lens{background:var(--paper-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .lens-tabs{display:flex;gap:0;border:1px solid var(--ink);width:fit-content;margin-bottom:36px;}
+  .lens-tabs button{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;
+    background:none;border:none;padding:12px 20px;cursor:pointer;
+    color:var(--ink-soft);border-right:1px solid var(--ink);
+    transition:background .15s,color .15s;
+  }
+  .lens-tabs button:last-child{border-right:none;}
+  .lens-tabs button.active{background:var(--ink);color:var(--paper);}
+  .lens-tabs button:hover:not(.active){background:var(--line-soft);color:var(--ink);}
+  .lens-body{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start;}
+  .lens-body h3{font-size:22px;margin-bottom:14px;}
+  .lens-body p.desc{color:var(--ink-soft);font-size:15.5px;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;
+    border:1px solid var(--line);padding:7px 12px;background:var(--card);
+    color:var(--ink-soft);
+  }
+  .lens-meta{
+    background:var(--card);border:1px solid var(--line);padding:24px;
+  }
+  .lens-meta .row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line-soft);font-size:14px;}
+  .lens-meta .row:last-child{border-bottom:none;}
+  .lens-meta .row span:first-child{color:var(--ink-faint);font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+  .lens-meta .row span:last-child{font-weight:500;text-align:right;}
+
+  /* ---------- PROJECTS ---------- */
+  .projects{display:flex;flex-direction:column;gap:2px;}
+  .project{
+    background:var(--card);border:1px solid var(--line);
+    padding:40px;display:grid;grid-template-columns:0.9fr 1.6fr;gap:44px;
+  }
+  .project + .project{margin-top:20px;}
+  .project-meta .index{font-family:'IBM Plex Mono',monospace;color:var(--accent-deep);font-size:13px;margin-bottom:14px;}
+  .project-meta h3{font-size:24px;line-height:1.15;margin-bottom:10px;}
+  .role-tag{
+    display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;
+    background:var(--accent-soft);color:var(--accent-deep);padding:5px 10px;margin-bottom:16px;
+  }
+  .project-meta .client{font-size:13.5px;color:var(--ink-faint);margin-bottom:22px;}
+  .project-meta .stackline{display:flex;flex-wrap:wrap;gap:6px;}
+  .project-meta .stackline span{
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);
+    border:1px solid var(--line);padding:4px 9px;
+  }
+  .project-thumb{
+    border:1px solid var(--line);background:var(--paper-alt);margin-bottom:22px;overflow:hidden;
+  }
+  .project-thumb .chrome{
+    display:flex;align-items:center;gap:6px;padding:9px 12px;background:var(--paper);border-bottom:1px solid var(--line);
+  }
+  .project-thumb .chrome .d{width:8px;height:8px;border-radius:50%;background:var(--line);}
+  .project-thumb .chrome .urlbar{
+    margin-left:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-faint);
+    background:var(--card);border:1px solid var(--line);padding:4px 10px;flex:1;
+  }
+  .project-thumb .art{aspect-ratio:16/9;width:100%;display:block;}
+  .project-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;background:var(--paper);}
+  .project-gallery img{width:100%;height:90px;object-fit:cover;object-position:top;border:1px solid var(--line);background:#111;cursor:pointer;transition:opacity .15s;}
+  .project-gallery img:hover{opacity:0.8;}
+  .link-row{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px;}
+  .link-row a{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--accent-deep);
+    border:1px solid var(--accent-deep);padding:7px 12px;text-decoration:none;
+    transition:background .15s,color .15s;
+  }
+  .link-row a:hover{background:var(--accent-deep);color:var(--paper);}
+  .placeholder-note{font-size:11.5px;color:var(--ink-faint);font-family:'IBM Plex Mono',monospace;padding:8px 12px;background:var(--card);border-top:1px dashed var(--line);}
+  .stage{margin-bottom:20px;}
+  .stage:last-child{margin-bottom:0;}
+  .stage .stage-label{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-faint);
+    text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .stage .stage-label::before{content:"";width:6px;height:6px;background:var(--accent-deep);border-radius:50%;display:inline-block;}
+  .stage p{font-size:14.5px;color:var(--ink);margin:0;}
+  .impact-row{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--line-soft);}
+  .impact-row .imp{}
+  .impact-row .imp .n{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:600;color:var(--signal);}
+  .impact-row .imp .l{font-size:12px;color:var(--ink-faint);max-width:16ch;}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{border-top:1px solid var(--line);}
+  .tl-item{
+    display:grid;grid-template-columns:180px 1fr;gap:32px;
+    padding:28px 0;border-bottom:1px solid var(--line);
+  }
+  .tl-item .when{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-faint);padding-top:3px;}
+  .tl-item h4{font-size:18px;}
+  .tl-item .co{font-size:13.5px;color:var(--accent-deep);font-family:'IBM Plex Mono',monospace;margin-top:2px;margin-bottom:12px;}
+  .tl-item ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:14.5px;}
+  .tl-item li{margin-bottom:5px;}
+
+  /* ---------- TOOLBOX ---------- */
+  .tool-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .tool-col{background:var(--card);padding:26px;}
+  .tool-col h4{font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-deep);margin-bottom:14px;}
+  .tool-col ul{list-style:none;margin:0;padding:0;font-size:14px;color:var(--ink-soft);}
+  .tool-col li{padding:5px 0;border-bottom:1px dashed var(--line-soft);}
+  .tool-col li:last-child{border-bottom:none;}
+
+  /* ---------- CERT / EDU ---------- */
+  .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;}
+  .cert-grid h4{font-family:'IBM Plex Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent-deep);margin-bottom:16px;}
+  .cert-grid ul{margin:0;padding:0;list-style:none;}
+  .cert-grid li{padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:14.5px;display:flex;justify-content:space-between;gap:12px;}
+  .cert-grid li span.org{color:var(--ink-faint);font-size:13px;text-align:right;}
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  footer.site{background:var(--ink);color:var(--paper);padding:80px 0 40px;}
+  footer.site .section-head{border-bottom:1px solid rgba(239,238,230,0.18);}
+  footer.site .tag{color:var(--accent-soft);}
+  footer.site h2{color:var(--paper);}
+  .contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:10px;}
+  .contact-card{border:1px solid rgba(239,238,230,0.2);padding:24px;}
+  .contact-card .k{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-soft);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;}
+  .contact-card a, .contact-card span.v{font-size:16px;color:var(--paper);text-decoration:none;font-weight:500;}
+  .contact-card a:hover{color:var(--accent-soft);}
+  .foot-bottom{margin-top:60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:rgba(239,238,230,0.5);border-top:1px solid rgba(239,238,230,0.15);padding-top:24px;}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .lens-body{grid-template-columns:1fr;}
+    .project{grid-template-columns:1fr;}
+    .tool-grid{grid-template-columns:1fr 1fr;}
+    .cert-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .stat-row{grid-template-columns:1fr 1fr;row-gap:20px;}
+    .stat:nth-child(3){border-left:none;padding-left:0;}
+  }
+  @media (max-width:720px){
+    .wrap{padding:0 20px;}
+    .navbar{padding:16px 20px;}
+    nav.links{display:none;}
+    .navtoggle{display:block;}
+    .pipeline{grid-template-columns:1fr 1fr;row-gap:28px;}
+    .pipeline::before{display:none;}
+    .tool-grid{grid-template-columns:1fr;}
+    .tl-item{grid-template-columns:1fr;gap:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="navbar">
+    <a href="#top" class="brand">Taiwo Okeowo<span class="dot">.</span></a>
+    <nav class="links">
+      <a href="#lens">Focus</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#toolbox">Toolbox</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="cta" href="https://clik.now/okeowo_taiwo_resume" target="_blank" rel="noopener">Résumé (PDF)</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Business Analyst · Product Manager · Project Manager</span>
+      <h1>I turn ambiguous requirements into <em>shipped systems.</em></h1>
+      <p class="hero-sub">Four years across fintech, SaaS, and infrastructure teams in Europe and Africa — gathering the requirement, writing the spec, running the sprint, and watching the metric move. Based in EMEA, working with distributed teams.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#work">See the work</a>
+        <a class="btn ghost" href="#experience">Read the experience</a>
+        <a class="btn ghost" href="https://clik.now/okeowo_taiwo_resume" target="_blank" rel="noopener">Download résumé ↓</a>
+      </div>
+
+      <div class="pipeline">
+        <div class="node"><span class="dot">01</span><div class="label">Discover</div><div class="desc">Stakeholder interviews, requirement elicitation</div></div>
+        <div class="node"><span class="dot">02</span><div class="label">Define</div><div class="desc">BRDs, PRDs, user stories, WBS</div></div>
+        <div class="node"><span class="dot">03</span><div class="label">Deliver</div><div class="desc">Sprint planning, QA, release management</div></div>
+        <div class="node"><span class="dot">04</span><div class="label">Adopt</div><div class="desc">KPIs, feedback loops, iteration</div></div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><div class="num">4+ yrs</div><div class="lbl">Across BA, Product, and Project leadership roles</div></div>
+        <div class="stat"><div class="num">5x</div><div class="lbl">MRR growth delivered at Tee Network Technology</div></div>
+        <div class="stat"><div class="num">10</div><div class="lbl">Largest cross-functional team led (engineering, UI/UX, QA)</div></div>
+        <div class="stat"><div class="num">$500k</div><div class="lbl">Client-funded product investment secured and managed</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lens" id="lens">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">Three lenses, one operator</span>
+          <h2>Pick the hat you're hiring for.</h2>
+        </div>
+        <p>Same track record, told from three angles — because most of the work overlaps. Switch views to see how the emphasis shifts.</p>
+      </div>
+
+      <div class="lens-tabs" role="tablist" aria-label="Role focus">
+        <button class="active" data-lens="ba" role="tab" aria-selected="true">Business Analyst</button>
+        <button data-lens="pm" role="tab" aria-selected="false">Product Manager</button>
+        <button data-lens="proj" role="tab" aria-selected="false">Project Manager</button>
+      </div>
+
+      <div class="lens-body">
+        <div>
+          <h3 id="lens-title">Dynamic, result-oriented IT Business/System Analyst</h3>
+          <p class="desc" id="lens-desc">
+            Over three years analyzing, designing, implementing, and maintaining IT infrastructure solutions. Manages projects with budgets up to $30,000 and cross-functional teams of up to 10. Translates ambiguous stakeholder needs into BRDs, PRDs, user stories, and acceptance criteria — then verifies the build against them.
+          </p>
+          <div class="chips" id="lens-chips">
+            <span class="chip">Requirement elicitation</span>
+            <span class="chip">BRD / PRD authoring</span>
+            <span class="chip">Regression testing</span>
+            <span class="chip">Defect tracking</span>
+            <span class="chip">UAT coordination</span>
+            <span class="chip">Workflow design</span>
+          </div>
+        </div>
+        <div class="lens-meta" id="lens-meta">
+          <div class="row"><span>Primary employer</span><span>KS Proprint D.O.O</span></div>
+          <div class="row"><span>Focus area</span><span>Fintech booking & escrow workflows</span></div>
+          <div class="row"><span>Signature output</span><span>Regression suite, 60–80% UI coverage</span></div>
+          <div class="row"><span>Toolset</span><span>Jira, Visio, ReqView, System Modeler</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">Selected work</span>
+          <h2>Four projects, four different problems.</h2>
+        </div>
+        <p>Each one moved through the same pipeline — discover, define, deliver, adopt — with a different role emphasis and a measurable outcome at the end.</p>
+      </div>
+
+      <div class="projects">
+
+        <article class="project">
+          <div class="project-meta">
+            <div class="index">01 / 06</div>
+            <span class="role-tag">Business Analyst</span>
+            <h3>Onboarding, verification &amp; escrow workflow platform</h3>
+            <div class="client">KS Proprint D.O.O — Zagreb, Croatia · 2024–2026</div>
+            <div class="stackline">
+              <span>Jira</span><span>BRD/PRD</span><span>UAT</span><span>Regression scripts</span><span>Role-based permissions</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="stage">
+              <div class="stage-label">Context</div>
+              <p>An enterprise print-and-fulfillment platform needed structured workflows for onboarding, identity verification, booking, escrow, and contracts — each with different role-based permissions and edge cases.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Approach</div>
+              <p>Ran stakeholder interviews and converted findings into BRDs, PRDs, user stories, and acceptance criteria. Designed the workflow logic for each stage, then automated regression coverage for dynamic UI — panels, map controls, SSO, modals, file uploads — and led UAT with weekly pass/fail reporting.</p>
+            </div>
+            <div class="impact-row">
+              <div class="imp"><div class="n">60–80%</div><div class="l">of UI functionality covered by regression scripts</div></div>
+              <div class="imp"><div class="n">High-priority</div><div class="l">production defects caught before release</div></div>
+              <div class="imp"><div class="n">Weekly</div><div class="l">QA reporting cadence established for the team</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta">
+            <div class="index">02 / 06</div>
+            <span class="role-tag">Technical Product Manager</span>
+            <h3>Financial data integration platform</h3>
+            <div class="client">KS Proprint D.O.O — Zagreb, Croatia · 2023–Present</div>
+            <div class="stackline">
+              <span>REST APIs</span><span>PRD</span><span>KPI dashboards</span><span>GTM strategy</span><span>Vendor negotiation</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="stage">
+              <div class="stage-label">Context</div>
+              <p>Enterprise clients across multiple industries needed a platform to integrate and reconcile financial data with third-party systems — with a credible go-to-market plan behind it.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Approach</div>
+              <p>Owned the full lifecycle — discovery, PRD documentation, sprint planning, and release management — for a cross-functional team of ten. Designed API-based integrations for interoperability, built adoption/churn/revenue dashboards, and led pricing and launch execution.</p>
+            </div>
+            <div class="impact-row">
+              <div class="imp"><div class="n">+25%</div><div class="l">market penetration in the first year</div></div>
+              <div class="imp"><div class="n">+40%</div><div class="l">customer satisfaction, via structured feedback loops</div></div>
+              <div class="imp"><div class="n">$500k</div><div class="l">client-funded investment secured</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta">
+            <div class="index">03 / 06</div>
+            <span class="role-tag">Systems Analyst</span>
+            <h3>Samsung Tizen display compatibility fix</h3>
+            <div class="client">Samsung — Remote contract · 2023</div>
+            <div class="stackline">
+              <span>Samsung SSSP</span><span>Data caching</span><span>Compatibility testing</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="stage">
+              <div class="stage-label">Context</div>
+              <p>A web application was failing to load on Samsung Tizen smart-signage displays — a defect affecting every device in the fleet, with no clear root cause.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Approach</div>
+              <p>Led technical analysis with a four-person team to isolate the failure, optimized data caching to cut load times, and evaluated Samsung Smart Signage Platform (SSSP) compatibility requirements to resolve the underlying conflicts.</p>
+            </div>
+            <div class="impact-row">
+              <div class="imp"><div class="n">-30%</div><div class="l">load time, after caching optimization</div></div>
+              <div class="imp"><div class="n">3</div><div class="l">critical compatibility issues resolved</div></div>
+              <div class="imp"><div class="n">+25%</div><div class="l">display performance improvement</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta">
+            <div class="index">04 / 06</div>
+            <span class="role-tag">Product Development Manager</span>
+            <h3>SME/enterprise app platform &amp; payment processing</h3>
+            <div class="client">Tee Network Technology — Akure, Nigeria · 2022</div>
+            <div class="stackline">
+              <span>Payments</span><span>Roadmapping</span><span>Sprint planning</span><span>Usability testing</span>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="stage">
+              <div class="stage-label">Context</div>
+              <p>SME and enterprise clients needed scalable web and mobile applications with reliable payment processing built in, on a company still finding its monetization model.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Approach</div>
+              <p>Led application development end to end, introduced and optimized the payment processing flow, and tightened sprint planning to shorten engineering cycles. Owned the backlog and roadmap, and ran user research to validate adoption.</p>
+            </div>
+            <div class="impact-row">
+              <div class="imp"><div class="n">5x</div><div class="l">MRR growth, $10k → $50k</div></div>
+              <div class="imp"><div class="n">+20%</div><div class="l">payment transaction volume</div></div>
+              <div class="imp"><div class="n">-30%</div><div class="l">time-to-market</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta">
+            <div class="index">05 / 06</div>
+            <span class="role-tag">Founder / Product Designer</span>
+            <h3>Prompt — event management app</h3>
+            <div class="client">Independent build · Solo product design &amp; strategy</div>
+            <div class="stackline">
+              <span>Figma</span><span>Market research</span><span>User flows</span><span>Hi-fi UI design</span>
+            </div>
+            <div class="link-row">
+              <a href="https://clik.now/prompt_app_link" target="_blank" rel="noopener">App ↗</a>
+              <a href="https://www.figma.com/proto/u9X2qs9OcdQIdchlHvJZaw/Prompt-app?node-id=112-202&starting-point-node-id=112%3A202" target="_blank" rel="noopener">Figma prototype ↗</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-thumb">
+              <div class="chrome">
+                <span class="d"></span><span class="d"></span><span class="d"></span>
+                <span class="urlbar">clik.now/prompt_app_link</span>
+              </div>
+              <img class="art" src="images/prompt-1.png" alt="Prompt app hi-fi screens: onboarding, event reminder, sign in, and home dashboard" style="width:100%;height:auto;object-fit:cover;">
+              <div class="project-gallery">
+                <img src="images/prompt-o.png" alt="Prompt app concept overview slide" onclick="window.open(this.src,'_blank')">
+                <img src="images/prompt-4.png" alt="Prompt app market research and target users slide" onclick="window.open(this.src,'_blank')">
+                <img src="images/prompt-2.png" alt="Prompt app user flow diagram for creating an event" onclick="window.open(this.src,'_blank')">
+                <img src="images/prompt-3.png" alt="Prompt app hi-fi screens: calendar, new event form, and wallet" onclick="window.open(this.src,'_blank')">
+              </div>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Context</div>
+              <p>Prompt is an event management app built to help users and organizers handle every side of an event — registration, marketing, engagement, integrations, physical planning, and reporting — so nothing important gets forgotten.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Approach</div>
+              <p>Ran market research to size the opportunity and identify target users, then mapped the end-to-end user flow for creating an event through interviews and observation. Designed and shipped the hi-fi screens solo — onboarding, sign-in, calendar, event creation, and wallet.</p>
+            </div>
+            <div class="impact-row">
+              <div class="imp"><div class="n">Live</div><div class="l">shipped and publicly accessible</div></div>
+              <div class="imp"><div class="n">3</div><div class="l">core personas: utility workers, students, millennials</div></div>
+              <div class="imp"><div class="n">Solo</div><div class="l">research through hi-fi delivery</div></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-meta">
+            <div class="index">06 / 06</div>
+            <span class="role-tag">Product Team Lead</span>
+            <h3>TNT — full web application rebuild</h3>
+            <div class="client">Tee Network Technology — Lagos, Nigeria</div>
+            <div class="stackline">
+              <span>Figma</span><span>Productboard</span><span>Jira</span><span>Slack</span><span>Branding & visual identity</span><span>Wireframing & prototyping</span>
+            </div>
+            <div class="link-row">
+              <a href="https://www.teenetworktech.com" target="_blank" rel="noopener">Site ↗</a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-thumb">
+              <div class="chrome">
+                <span class="d"></span><span class="d"></span><span class="d"></span>
+                <span class="urlbar">teenetworktech.com/index.php</span>
+              </div>
+              <img class="art" src="images/tnt-cover.png" alt="Tee Network Technology rebuilt website homepage, showing the Do More Pay Less hero section" style="width:100%;height:auto;object-fit:cover;">
+            </div>
+            <div class="stage">
+              <div class="stage-label">Context</div>
+              <p>Tee Network Technology, a Lagos-based IT service provider, needed a complete rebuild of their web application to properly represent the range of services they offer — web, mobile, and product design — and convert visitors into clients.</p>
+            </div>
+            <div class="stage">
+              <div class="stage-label">Approach</div>
+              <p>Led the product team through the full redesign: UX and UI design, a refreshed brand and visual identity, and wireframing and prototyping in Figma, tracked through Productboard and Jira with the team coordinating in Slack.</p>
+            </div>
+            <div class="impact-row">
+              <div class="imp"><div class="n">↑ Revenue</div><div class="l">tremendous increase post-launch</div></div>
+              <div class="imp"><div class="n">Full</div><div class="l">brand & visual identity refresh</div></div>
+              <div class="imp"><div class="n">Live</div><div class="l">production site, teenetworktech.com</div></div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">Experience</span>
+          <h2>Where the track record comes from.</h2>
+        </div>
+        <p>Four roles, two continents, one thread — requirements in, working systems out.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="when">2023/01 — Present<br>Zagreb, Croatia</div>
+          <div>
+            <h4>Business/System Analyst &amp; Technical Product Manager (Contract)</h4>
+            <div class="co">KS Proprint D.O.O</div>
+            <ul>
+              <li>Gathered stakeholder requirements and converted them into BRDs, PRDs, FSDs, user stories, and acceptance criteria.</li>
+              <li>Directed full product lifecycle: discovery, PRD documentation, sprint planning, release management, post-launch optimization.</li>
+              <li>Designed workflows for onboarding, verification, booking, escrow, contracts, and role-based permissions.</li>
+              <li>Secured and managed approximately $500,000 in client-funded product investment.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="when">2023/01 — 2023/12<br>Remote</div>
+          <div>
+            <h4>System Analyst</h4>
+            <div class="co">Samsung</div>
+            <ul>
+              <li>Diagnosed loading failures affecting all Samsung Tizen smart-signage displays.</li>
+              <li>Optimized data caching with a four-person team, cutting load times by 30%.</li>
+              <li>Resolved 3 critical SSSP compatibility issues, improving display performance by 25%.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="when">2022/01 — 2022/12<br>Akure, Nigeria</div>
+          <div>
+            <h4>IT Business Analyst / Product Development Manager</h4>
+            <div class="co">Tee Network Technology</div>
+            <ul>
+              <li>Engaged 20+ clients to translate business objectives into technical requirements.</li>
+              <li>Designed scalable system architectures for 4 clients, each supporting up to 1,000 users.</li>
+              <li>Scaled company revenue from $10,000 to $50,000 MRR through improved positioning and monetization.</li>
+              <li>Delivered 100% of projects on time within budgets of $500–$10,000.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="when">2021/02 — 2021/06<br>Lagos, Nigeria</div>
+          <div>
+            <h4>Associate Product/Project Manager (Internship)</h4>
+            <div class="co">Gnet Technologies</div>
+            <ul>
+              <li>Contributed to a CRM feature that increased user engagement by 30%.</li>
+              <li>Reduced time-to-market by 30% through structured Agile sprint workflows.</li>
+              <li>Developed monetization and subscription pricing strategies; ran A/B tests to improve adoption.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="toolbox">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">Toolbox</span>
+          <h2>What's actually in the stack.</h2>
+        </div>
+        <p>The methodologies, software, and technical grounding behind the work above.</p>
+      </div>
+
+      <div class="tool-grid">
+        <div class="tool-col">
+          <h4>Methodology</h4>
+          <ul>
+            <li>PMBOK Framework</li>
+            <li>Agile / Scrum</li>
+            <li>Kanban &amp; Hybrid</li>
+            <li>SDLC</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Delivery &amp; PM tools</h4>
+          <ul>
+            <li>Jira, Confluence</li>
+            <li>Trello, Asana, ClickUp</li>
+            <li>MS Project, Monday.com</li>
+            <li>Notion</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Analysis &amp; design</h4>
+          <ul>
+            <li>Visio, Lucidchart, Draw.io</li>
+            <li>Visual Paradigm, Enterprise Architect</li>
+            <li>ReqView, System Modeler</li>
+            <li>Figma, Miro</li>
+          </ul>
+        </div>
+        <div class="tool-col">
+          <h4>Technical</h4>
+          <ul>
+            <li>REST APIs, SaaS architecture</li>
+            <li>SQL (basic)</li>
+            <li>Basic Kubernetes</li>
+            <li>Power BI, Google Analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="tag">Credentials</span>
+          <h2>Education &amp; certifications.</h2>
+        </div>
+      </div>
+
+      <div class="cert-grid">
+        <div>
+          <h4>Education</h4>
+          <ul>
+            <li>B.Tech, Computer Science <span class="org">Federal University of Technology, Akure · 2023</span></li>
+          </ul>
+          <h4 style="margin-top:32px;">Languages</h4>
+          <ul>
+            <li>English <span class="org">Fluent</span></li>
+            <li>Yoruba <span class="org">Native</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Certifications</h4>
+          <ul>
+            <li>Certified Project Manager (CPM) <span class="org">Project Management Institute</span></li>
+            <li>Google Project Management <span class="org">Google</span></li>
+            <li>Certified Product Manager (CPM) <span class="org">Job Hackers</span></li>
+            <li>Agile Business Analyst <span class="org">Job Hackers</span></li>
+            <li>Agile PM MBA <span class="org">Job Hackers</span></li>
+            <li>Scrum Fundamentals <span class="org">—</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="tag">Get in touch</span>
+        <h2>Have a workflow that needs untangling?</h2>
+      </div>
+      <p style="color:rgba(239,238,230,0.65);">Open to contract and full-time roles across Business Analysis, Product, and Project Management — remote or EMEA-based.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="k">Email</div>
+        <a href="mailto:okeowoidris01@gmail.com">okeowoidris01@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="k">Phone</div>
+        <span class="v">+234 813 197 1382</span>
+      </div>
+      <div class="contact-card">
+        <div class="k">LinkedIn</div>
+        <a href="https://www.linkedin.com/in/okeowo-taiwo/" target="_blank" rel="noopener">linkedin.com/in/okeowo-taiwo</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Taiwo Okeowo — EMEA</span>
+      <span>Built for Business Analysis · Product Management · Project Management</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const lensData = {
+    ba: {
+      title: "Dynamic, result-oriented IT Business/System Analyst",
+      desc: "Over three years analyzing, designing, implementing, and maintaining IT infrastructure solutions. Manages projects with budgets up to $30,000 and cross-functional teams of up to 10. Translates ambiguous stakeholder needs into BRDs, PRDs, user stories, and acceptance criteria — then verifies the build against them.",
+      chips: ["Requirement elicitation","BRD / PRD authoring","Regression testing","Defect tracking","UAT coordination","Workflow design"],
+      meta: [
+        ["Primary employer","KS Proprint D.O.O"],
+        ["Focus area","Fintech booking & escrow workflows"],
+        ["Signature output","Regression suite, 60–80% UI coverage"],
+        ["Toolset","Jira, Visio, ReqView, System Modeler"]
+      ]
+    },
+    pm: {
+      title: "Strategic Technical Product Manager, enterprise SaaS &amp; fintech",
+      desc: "Four-plus years leading enterprise SaaS and fintech product development across Europe and Africa. Full lifecycle ownership from discovery and market validation through GTM execution and post-launch optimization, with a track record of 5x MRR growth and 25%+ adoption gains.",
+      chips: ["Product strategy & vision","Go-to-market strategy","Roadmapping","Revenue & monetization","KPIs / OKRs","API ecosystems"],
+      meta: [
+        ["Primary employer","KS Proprint D.O.O"],
+        ["Focus area","Financial data integration platform"],
+        ["Signature output","+25% market penetration, $500k secured"],
+        ["Toolset","Jira, Confluence, HubSpot, Power BI"]
+      ]
+    },
+    proj: {
+      title: "Strategic IT Project Manager, PMBOK-aligned delivery",
+      desc: "Four years leading infrastructure, software, and real-time systems projects across Europe and Africa. Full lifecycle delivery — initiating, planning, executing, monitoring &amp; controlling, closing — with proven budget control, risk mitigation, and on-time delivery for distributed technical teams.",
+      chips: ["Project governance","WBS & scope management","Risk register","Earned value tracking","Vendor management","Change control"],
+      meta: [
+        ["Primary employer","KS Proprint D.O.O"],
+        ["Focus area","Real-time connectivity systems"],
+        ["Signature output","4–10 engineer teams, SLA compliance"],
+        ["Toolset","MS Project, Jira, Monday.com"]
+      ]
+    }
+  };
+
+  const tabs = document.querySelectorAll('.lens-tabs button');
+  const titleEl = document.getElementById('lens-title');
+  const descEl = document.getElementById('lens-desc');
+  const chipsEl = document.getElementById('lens-chips');
+  const metaEl = document.getElementById('lens-meta');
+
+  function renderLens(key){
+    const d = lensData[key];
+    titleEl.innerHTML = d.title;
+    descEl.innerHTML = d.desc;
+    chipsEl.innerHTML = d.chips.map(c => `<span class="chip">${c}</span>`).join('');
+    metaEl.innerHTML = d.meta.map(([k,v]) => `<div class="row"><span>${k}</span><span>${v}</span></div>`).join('');
+  }
+
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabs.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      renderLens(btn.dataset.lens);
+    });
+  });
+</script>
+
+</body>
+</html>
